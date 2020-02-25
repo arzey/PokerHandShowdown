@@ -103,7 +103,7 @@ namespace PokerHandShowdown.Core.Tests
 
             deck.Remove(card);
 
-            Assert.IsFalse(deck.Deck.Exists(c => c == card));
+            Assert.IsFalse(deck.Deck.ToList().Exists(c => c == card));
         }
     }
 }

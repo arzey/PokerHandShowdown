@@ -30,7 +30,7 @@ namespace PokerHandShowdown.Core.Tests
         }
 
         [Test]
-        public void InitializeWithParametersShouldReturnCorrectPlayers()
+        public void Engine_WhenInitializedShouldHaveTheCorrectPlayers()
         {
             var player1 = new Player { Name = "Alice", Hand = _dealer.FillHand() };
             var player2 = new Player { Name = "Joe", Hand = _dealer.FillHand() };
@@ -49,7 +49,7 @@ namespace PokerHandShowdown.Core.Tests
         }
 
         [Test]
-        public void EngineShouldGenerateWinner()
+        public void GetWinningPlayers_ShouldGenerateWinners()
         {
             var player1 = new Player { Name = "Alice", Hand = _dealer.FillHand() };
             var player2 = new Player { Name = "Joe", Hand = _dealer.FillHand() };
@@ -63,7 +63,7 @@ namespace PokerHandShowdown.Core.Tests
         }
 
         [Test]
-        public void SplitWinnersFromOnePair()
+        public void GetWinningPlayers_ShouldProduceTwoWinners()
         {
             var hand1 = new Hand
             {
@@ -95,7 +95,7 @@ namespace PokerHandShowdown.Core.Tests
         }
 
         [Test]
-        public void OnePairShouldWinAgainstHighCard()
+        public void GetWinningPlayers_OnePairShouldWinAgainstHighCard()
         {
             var hand1 = new Hand
             {
@@ -127,7 +127,7 @@ namespace PokerHandShowdown.Core.Tests
         }
 
         [Test]
-        public void Player2ShouldWinOnePairTieBreaker()
+        public void GetWinningPlayers_PlayerTwoShouldWinTieBreaker()
         {
             var hand1 = new Hand
             {
@@ -159,7 +159,7 @@ namespace PokerHandShowdown.Core.Tests
         }
 
         [Test]
-        public void ThreeOfAKindShouldWinAgainstOnePair()
+        public void GetWinningPlayers_ThreeOfKindShouldWinAgainstOnePair()
         {
             var hand1 = new Hand
             {
@@ -191,7 +191,7 @@ namespace PokerHandShowdown.Core.Tests
         }
 
         [Test]
-        public void ThreeOfAKindShouldWinAgainstHighCard()
+        public void GetWinningPlayers_ThreeOfAKindShouldWinAgainstHighCard()
         {
             var hand1 = new Hand
             {
@@ -223,7 +223,7 @@ namespace PokerHandShowdown.Core.Tests
         }
 
         [Test]
-        public void FlushShouldWinAgainstThreeOfAKind()
+        public void GetWinningPlayers_FlushShouldWinAgainstThreeOfAKind()
         {
             var hand1 = new Hand
             {
@@ -255,7 +255,7 @@ namespace PokerHandShowdown.Core.Tests
         }
 
         [Test]
-        public void FlushShouldWinAgainstOnePair()
+        public void GetWinningPlayers_FlushShouldWinAgainstOnePair()
         {
             var hand1 = new Hand
             {
@@ -287,7 +287,7 @@ namespace PokerHandShowdown.Core.Tests
         }
 
         [Test]
-        public void FlushShouldWinAgainstHighCard()
+        public void GetWinningPlayers_FlushShouldWinAgainstHighCard()
         {
             var hand1 = new Hand
             {
@@ -319,7 +319,7 @@ namespace PokerHandShowdown.Core.Tests
         }
 
         [Test]
-        public void FlushWithAceShouldWin()
+        public void GetWinningPlayers_FlushWithAceShouldWin()
         {
             var hand1 = new Hand
             {
@@ -351,7 +351,7 @@ namespace PokerHandShowdown.Core.Tests
         }
 
         [Test]
-        public void FlushWithSameValueShouldGenerateTwoWinners()
+        public void GetWinningPlayers_FlushWithSameValueShouldGenerateTwoWinners()
         {
             var hand1 = new Hand
             {
@@ -383,7 +383,7 @@ namespace PokerHandShowdown.Core.Tests
         }
 
         [Test]
-        public void EnsurePlayersHasCorrectNumberOfCards()
+        public void CheckPlayerHand_EnsurePlayersHasCorrectNumberOfCards()
         {
             var hand1 = new Hand
             {

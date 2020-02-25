@@ -70,12 +70,12 @@ namespace PokerHandShowdown.Core
             foreach (var player in Players)
             {
                 var baseScore = player.Hand.Sum(e => (int)e.Rank);
-                var playerHighCard = player.Hand.OrderByDescending(e => e.Rank).First();
+                var playerHighCard = player.Hand.HighestCard;
 
                 if (player.Hand.IsFlush)
-                    playerScores.Add(player, baseScore + (50 * (int)HandType.Flush) + (25 * (int)playerHighCard.Rank));
+                    playerScores.Add(player, baseScore + (100 * (int)HandType.Flush) + (25 * (int)playerHighCard.Rank));
                 else if (player.Hand.IsThreeOfAKind)
-                    playerScores.Add(player, baseScore + (50 * (int)HandType.ThreeOfAKind) + (25 * (int)playerHighCard.Rank));
+                    playerScores.Add(player, baseScore + (75 * (int)HandType.ThreeOfAKind) + (25 * (int)playerHighCard.Rank));
                 else if (player.Hand.IsOnePair)
                     playerScores.Add(player, baseScore + (50 * (int)HandType.OnePair) + (25 * (int)playerHighCard.Rank));
                 else

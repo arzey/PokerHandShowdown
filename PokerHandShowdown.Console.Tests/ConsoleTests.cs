@@ -7,15 +7,8 @@ namespace PokerHandShowdown.Console.Tests
 {
     public class ConsoleTests
     {
-
         [Test]
-        public void ProgramShouldHaveInitializedDeck()
-        {
-            Assert.AreEqual(52, Program._dealer.Deck.Count);
-        }
-
-        [Test]
-        public void MapperShouldReturnValidCard()
+        public void Mapper_ShouldReturnValidCard()
         {
             var card = CardMapper.Map("ad");
 
@@ -30,7 +23,7 @@ namespace PokerHandShowdown.Console.Tests
         [TestCase("kD", ExpectedResult = "King of Diamond")]
         [TestCase("ts", ExpectedResult = "Ten of Spades")]
         [TestCase("9C", ExpectedResult = "Nine of Clubs")]
-        public string MapperShouldReturnCardString(string code)
+        public string Mapper_ShouldReturnCardString(string code)
         {
             return code.Map().ToString();
         }
@@ -40,13 +33,13 @@ namespace PokerHandShowdown.Console.Tests
         [TestCase("3")]
         [TestCase("Joe")]
         [TestCase(null)]
-        public void MapperShouldReturnNull(string code)
+        public void Mapper_ShouldReturnNull(string code)
         {
             Assert.IsNull(CardMapper.Map(code));
         }
 
         [TestCase("-Alice -Bob 5d -Jen")]
-        public void ProgramShouldTakeInput(string input)
+        public void Program_ShouldTakeInput(string input)
         {
             var sets = Program.TakeUserInput(input);
 
@@ -55,7 +48,7 @@ namespace PokerHandShowdown.Console.Tests
 
         [Test]
         [Repeat(150)]
-        public void ProgramShouldRunSimulation()
+        public void Program_SimulateRoundShouldProduceWinners()
         {
             Program.SimulateRound();
 
@@ -63,7 +56,7 @@ namespace PokerHandShowdown.Console.Tests
         }
 
         [TestCase("-rj 5d ad 3d 6d td -alice ts 3c 3h 5s 5h 4d ts tc th")]
-        public void OverflowCardsShouldNotBeAddedToHand(string args)
+        public void ProcessUserInputFromKeys_WhenCardsOverflowItShouldNotBeAddedToHand(string args)
         {
             var keys = Program.TakeUserInput(args);
             var players = Program.ProcessUserInputFromKeys(keys);
@@ -78,7 +71,7 @@ namespace PokerHandShowdown.Console.Tests
         }
 
         [TestCase("-rj 5d ad 3d 6d td -alice 4s -ben -joe test 6s 6c")]
-        public void ShouldGenerateFourPlayersWithCompletedHand(string args)
+        public void ProcessUserInputFromKeys_ShouldProduceCorrectNumberOfCardsInHand(string args)
         {
             var keys = Program.TakeUserInput(args);
             var players = Program.ProcessUserInputFromKeys(keys);
@@ -93,7 +86,7 @@ namespace PokerHandShowdown.Console.Tests
         }
 
         [TestCase("-rj 5d ad 3d 6d td -alice 4s -ben -joe test 6s 6c")]
-        public void RJShouldWinTestRound(string args)
+        public void CompleteRound_WhenCompleteRoundIsCalledFlushShouldBeTheWinner(string args)
         {
             var keys = Program.TakeUserInput(args);
             var players = Program.ProcessUserInputFromKeys(keys);

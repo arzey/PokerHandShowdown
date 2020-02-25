@@ -8,7 +8,7 @@ namespace PokerHandShowdown.Core.Tests
     public class HandTests
     {
         [Test]
-        public void ShouldThrowException()
+        public void Hand_AddingSixthCardShouldThrowException()
         {
             var hand = new Hand
             {
@@ -26,23 +26,7 @@ namespace PokerHandShowdown.Core.Tests
         }
 
         [Test]
-        public void FlushOfClubsHandValueShouldEqualsToTwenty()
-        {
-            var hand = new Hand
-            {
-                new Card { Rank = Rank.Two, Suit = Suit.Clubs },
-                new Card { Rank = Rank.Three, Suit = Suit.Clubs },
-                new Card { Rank = Rank.Four, Suit = Suit.Clubs },
-                new Card { Rank = Rank.Five, Suit = Suit.Clubs },
-                new Card { Rank = Rank.Six, Suit = Suit.Clubs },
-            };
-
-            Assert.AreEqual(20, hand.HandValue);
-        }
-
-
-        [Test]
-        public void TwoOneOfAKindShouldReturnHighestPair()
+        public void Hand_RankTwoShouldBeTheHighestRank()
         {
             var hand = new Hand
             {
@@ -57,7 +41,7 @@ namespace PokerHandShowdown.Core.Tests
         }
 
         [Test]
-        public void HandShouldReturnIsFlushToTrue()
+        public void HandProperty_IsFlushShouldBeTrue()
         {
             var hand = new Hand
             {
@@ -71,21 +55,6 @@ namespace PokerHandShowdown.Core.Tests
             Assert.IsTrue(hand.IsFlush);
         } 
 
-        [TestCase]
-        public void FlushOfSpadesHandValueShouldEqualsToTwenty()
-        {
-            var hand = new Hand
-            {
-                new Card { Rank = Rank.Two, Suit = Suit.Spades },
-                new Card { Rank = Rank.Three, Suit = Suit.Spades },
-                new Card { Rank = Rank.Four, Suit = Suit.Spades },
-                new Card { Rank = Rank.Five, Suit = Suit.Spades },
-                new Card { Rank = Rank.King, Suit = Suit.Spades }
-            };
-
-            Assert.AreEqual(27, hand.HandValue);
-        }
-
         [Test]
         public void ShouldNotBeAbleToAddSameCard()
         {
@@ -95,7 +64,7 @@ namespace PokerHandShowdown.Core.Tests
 
                 hand.Add(new Card { Rank = Rank.Two, Suit = Suit.Clubs });
                 hand.Add(new Card { Rank = Rank.Two, Suit = Suit.Clubs });
-            }, "Card already exists in hand.");
+            }, "Card already exists in hand: Two of Clubs");
         }
     }
 }

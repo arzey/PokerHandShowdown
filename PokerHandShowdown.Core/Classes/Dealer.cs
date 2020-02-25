@@ -10,18 +10,19 @@ namespace PokerHandShowdown.Core
     public class Dealer
     {
         private Random _random = new Random();
-        public List<Card> Deck { get; private set; }
+        private List<Card> _deck { get; set; }
+        public IReadOnlyList<Card> Deck => _deck;
 
         public Dealer()
         {
-            Deck = new List<Card>();
+            _deck = new List<Card>();
 
             foreach (var suit in Enum.GetValues(typeof(Suit)))
             {
                 foreach (var rank in Enum.GetValues(typeof(Rank)))
                 {
                     if ((Rank)rank != Rank.None)
-                        Deck.Add(new Card { Rank = (Rank) rank, Suit = (Suit) suit });
+                        _deck.Add(new Card { Rank = (Rank) rank, Suit = (Suit) suit });
                 }
             }
         }
@@ -31,7 +32,7 @@ namespace PokerHandShowdown.Core
             var card = Deck.First();
 
             player.Hand.Add(card);
-            Deck.Remove(card);
+            _deck.Remove(card);
         }
 
         public Hand FillHand()
@@ -42,7 +43,7 @@ namespace PokerHandShowdown.Core
             foreach (var card in cards)
             {
                 hand.Add(card);
-                Deck.Remove(card);
+                _deck.Remove(card);
             }
 
             return hand;
@@ -50,7 +51,7 @@ namespace PokerHandShowdown.Core
 
         public void Remove(Card card)
         {
-            Deck.Remove(card);
+            _deck.Remove(card);
         }
 
         public void Shuffle()
@@ -74,7 +75,7 @@ namespace PokerHandShowdown.Core
                 shuffledCards.Add(card);
             }
 
-            Deck = shuffledCards;
+            _deck = shuffledCards;
         }
     }
 }
