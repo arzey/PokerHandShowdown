@@ -9,10 +9,10 @@ namespace PokerHandShowdown.Core.Tests
 {
     public class PokerEngineTests
     {
-        private readonly Dealer _deck = new Dealer();
+        private readonly Dealer _dealer = new Dealer();
 
         [Test]
-        public void SimulateShouldGenerateFourPlayers()
+        public void Simulate_ShouldGenerateFourPlayers()
         {
             var engine = new PokerEngine();
             engine.Simulate();
@@ -21,7 +21,7 @@ namespace PokerHandShowdown.Core.Tests
         }
 
         [Test]
-        public void SimulateShouldGenerateAtLeastOneWinner()
+        public void Simulate_ShouldGenerateAtLeastOneWinner()
         {
             var engine = new PokerEngine();
             engine.Simulate();
@@ -32,12 +32,12 @@ namespace PokerHandShowdown.Core.Tests
         [Test]
         public void InitializeWithParametersShouldReturnCorrectPlayers()
         {
-            var player1 = new Player { Name = "Alice", Hand = _deck.FillHand() };
-            var player2 = new Player { Name = "Joe", Hand = _deck.FillHand() };
+            var player1 = new Player { Name = "Alice", Hand = _dealer.FillHand() };
+            var player2 = new Player { Name = "Joe", Hand = _dealer.FillHand() };
 
             var playerList = new List<Player> { player1, player2 };
 
-            var engine = new PokerEngine(_deck, playerList);
+            var engine = new PokerEngine(_dealer, playerList);
 
             Assert.Multiple(() =>
             {
@@ -51,12 +51,12 @@ namespace PokerHandShowdown.Core.Tests
         [Test]
         public void EngineShouldGenerateWinner()
         {
-            var player1 = new Player { Name = "Alice", Hand = _deck.FillHand() };
-            var player2 = new Player { Name = "Joe", Hand = _deck.FillHand() };
+            var player1 = new Player { Name = "Alice", Hand = _dealer.FillHand() };
+            var player2 = new Player { Name = "Joe", Hand = _dealer.FillHand() };
 
             var playerList = new List<Player> { player1, player2 };
 
-            var engine = new PokerEngine(_deck, playerList);
+            var engine = new PokerEngine(_dealer, playerList);
             engine.GetWinningPlayers();
 
             Assert.GreaterOrEqual(1, engine.Winners.Count);
@@ -88,7 +88,7 @@ namespace PokerHandShowdown.Core.Tests
 
             var playerList = new List<Player> { player1, player2 };
 
-            var engine = new PokerEngine(_deck, playerList);
+            var engine = new PokerEngine(_dealer, playerList);
             engine.GetWinningPlayers();
 
             Assert.AreEqual(2, engine.Winners.Count);
@@ -120,7 +120,7 @@ namespace PokerHandShowdown.Core.Tests
 
             var playerList = new List<Player> { player1, player2 };
 
-            var engine = new PokerEngine(_deck, playerList);
+            var engine = new PokerEngine(_dealer, playerList);
             engine.GetWinningPlayers();
 
             Assert.AreEqual(player1, engine.Winners.Single());
@@ -152,7 +152,7 @@ namespace PokerHandShowdown.Core.Tests
 
             var playerList = new List<Player> { player1, player2 };
 
-            var engine = new PokerEngine(_deck, playerList);
+            var engine = new PokerEngine(_dealer, playerList);
             engine.GetWinningPlayers();
 
             Assert.AreEqual(player2, engine.Winners.Single());
@@ -184,7 +184,7 @@ namespace PokerHandShowdown.Core.Tests
 
             var playerList = new List<Player> { player1, player2 };
 
-            var engine = new PokerEngine(_deck, playerList);
+            var engine = new PokerEngine(_dealer, playerList);
             engine.GetWinningPlayers();
 
             Assert.AreEqual(player2, engine.Winners.Single());
@@ -216,7 +216,7 @@ namespace PokerHandShowdown.Core.Tests
 
             var playerList = new List<Player> { player1, player2 };
 
-            var engine = new PokerEngine(_deck, playerList);
+            var engine = new PokerEngine(_dealer, playerList);
             engine.GetWinningPlayers();
 
             Assert.AreEqual(player2, engine.Winners.Single());
@@ -248,7 +248,7 @@ namespace PokerHandShowdown.Core.Tests
 
             var playerList = new List<Player> { player1, player2 };
 
-            var engine = new PokerEngine(_deck, playerList);
+            var engine = new PokerEngine(_dealer, playerList);
             engine.GetWinningPlayers();
 
             Assert.AreEqual(player1, engine.Winners.Single());
@@ -280,7 +280,7 @@ namespace PokerHandShowdown.Core.Tests
 
             var playerList = new List<Player> { player1, player2 };
 
-            var engine = new PokerEngine(_deck, playerList);
+            var engine = new PokerEngine(_dealer, playerList);
             engine.GetWinningPlayers();
 
             Assert.AreEqual(player1, engine.Winners.Single());
@@ -312,7 +312,7 @@ namespace PokerHandShowdown.Core.Tests
 
             var playerList = new List<Player> { player1, player2 };
 
-            var engine = new PokerEngine(_deck, playerList);
+            var engine = new PokerEngine(_dealer, playerList);
             engine.GetWinningPlayers();
 
             Assert.AreEqual(player1, engine.Winners.Single());
@@ -344,7 +344,7 @@ namespace PokerHandShowdown.Core.Tests
 
             var playerList = new List<Player> { player1, player2 };
 
-            var engine = new PokerEngine(_deck, playerList);
+            var engine = new PokerEngine(_dealer, playerList);
             engine.GetWinningPlayers();
 
             Assert.AreEqual(player2, engine.Winners.Single());
@@ -376,7 +376,7 @@ namespace PokerHandShowdown.Core.Tests
 
             var playerList = new List<Player> { player1, player2 };
 
-            var engine = new PokerEngine(_deck, playerList);
+            var engine = new PokerEngine(_dealer, playerList);
             engine.GetWinningPlayers();
 
             Assert.AreEqual(2, engine.Winners.Count);
@@ -402,7 +402,7 @@ namespace PokerHandShowdown.Core.Tests
 
             var playerList = new List<Player> { player1, player2 };
 
-            var engine = new PokerEngine(_deck, playerList);
+            var engine = new PokerEngine(_dealer, playerList);
 
             engine.CheckPlayerHand();
 

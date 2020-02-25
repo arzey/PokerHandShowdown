@@ -19,7 +19,7 @@ namespace PokerHandShowdown.Core.Classes
 
         public bool IsOnePair => _cards.GroupBy(card => card.Rank).Where(rank => rank.Count() == 2).Any();
 
-        public bool IsThreeOfAKind => _cards.GroupBy(card => card.Rank).Where(rank => rank.Count() == 3).Any();
+        public bool IsThreeOfAKind => _cards.GroupBy(card => card.Rank).Where(rank => rank.Count() <= 3).Any();
 
         public Rank RankOfPairs => GetRankOfPairs();
 
@@ -108,7 +108,7 @@ namespace PokerHandShowdown.Core.Classes
         {
             if (IsThreeOfAKind)
             {
-                return _cards.GroupBy(c => c.Rank).Where(rank => rank.Count() == 3).Max(x => x.Key);
+                return _cards.GroupBy(c => c.Rank).Where(rank => rank.Count() <= 3).Max(x => x.Key);
             }
             else if (IsOnePair)
             {
@@ -133,7 +133,7 @@ namespace PokerHandShowdown.Core.Classes
         private void CheckCardIfInHand(Card card)
         {
             if (_cards.Any(c => c.Rank == card.Rank && c.Suit == card.Suit))
-                throw new Exception("Card already exists in hand.");
+                throw new Exception($"Card already exists in hand: {card.ToString()}");
         }
 
         public override string ToString()

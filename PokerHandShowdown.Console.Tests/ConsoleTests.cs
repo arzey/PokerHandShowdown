@@ -11,7 +11,7 @@ namespace PokerHandShowdown.Console.Tests
         [Test]
         public void ProgramShouldHaveInitializedDeck()
         {
-            Assert.AreEqual(52, Program._deck.Deck.Count);
+            Assert.AreEqual(52, Program._dealer.Deck.Count);
         }
 
         [Test]

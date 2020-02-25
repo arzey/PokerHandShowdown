@@ -8,12 +8,12 @@ namespace PokerHandShowdown.UI
 {
     public static class Program
     {
-        public static readonly Dealer _deck = new Dealer();
+        public static readonly Dealer _dealer = new Dealer();
         public static PokerEngine _engine;
 
         static Program()
         {
-            _deck.Shuffle();
+            _dealer.Shuffle();
         }
 
         public static void Main(string[] args)
@@ -108,7 +108,7 @@ namespace PokerHandShowdown.UI
                             if (hand.Count < 5)
                             {
                                 hand.Add(card);
-                                _deck.Remove(card);
+                                _dealer.Remove(card);
                             }
                         }
                     }
@@ -127,7 +127,7 @@ namespace PokerHandShowdown.UI
             _engine.Simulate();
 
             var winners = _engine.Winners;
-            DisplayWinners(winners);
+            DisplayWinners(winners.ToList());
         }
 
         public static void CompleteRound(List<Player> players)
@@ -137,14 +137,15 @@ namespace PokerHandShowdown.UI
                 var names = new string[4] { "Joe", "Jen", "Bob", "Alice" };
                 for (int i = players.Count; i < 4; i++)
                 {
-                    var player = new Player { Name = names[i - 1], Hand = _deck.FillHand() };
+                    var player = new Player { Name = names[i - 1], Hand = _dealer.FillHand() };
 
                     players.Add(player);
                 }
             }
 
-            _engine = new PokerEngine(_deck, players);
+            _engine = new PokerEngine(_dealer, players);
             _engine.CheckPlayerHand();
+
             var winners = _engine.GetWinningPlayers();
 
             DisplayWinners(winners);
