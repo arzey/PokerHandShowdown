@@ -8,17 +8,17 @@ namespace PokerHandShowdown.Core
 {
     public class PokerEngine
     {
-        public Deck Deck { get; private set; } 
+        public Dealer Deck { get; private set; } 
         public List<Player> Players { get; private set; }
         public List<Player> Winners { get; private set; }
 
         public PokerEngine()
         {
-            Deck = new Deck();
+            Deck = new Dealer();
             Players = new List<Player>();
         }
 
-        public PokerEngine(Deck deck, List<Player> players) : this()
+        public PokerEngine(Dealer deck, List<Player> players) : this()
         {
             Deck = deck;
             Players = players;

@@ -61,11 +61,7 @@ namespace PokerHandShowdown.Core.Classes
 
         public bool Remove(Card item)
         {
-            if (_cards.Remove(item))
-            {
-                return true;
-            }
-            return false;
+            return _cards.Remove(item);
         }
 
         public void RemoveAt(int index)

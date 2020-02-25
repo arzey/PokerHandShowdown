@@ -9,7 +9,7 @@ namespace PokerHandShowdown.Core.Tests
 {
     public class PokerEngineTests
     {
-        private readonly Deck _deck = new Deck();
+        private readonly Dealer _deck = new Dealer();
 
         [Test]
         public void SimulateShouldGenerateFourPlayers()

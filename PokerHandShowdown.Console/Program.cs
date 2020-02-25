@@ -8,7 +8,7 @@ namespace PokerHandShowdown.UI
 {
     public static class Program
     {
-        public static readonly Deck _deck = new Deck();
+        public static readonly Dealer _deck = new Dealer();
         public static PokerEngine _engine;
 
         static Program()

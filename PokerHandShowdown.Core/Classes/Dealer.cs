@@ -7,42 +7,42 @@ using System.Threading;
 
 namespace PokerHandShowdown.Core
 {
-    public class Deck
+    public class Dealer
     {
         private Random _random = new Random();
-        public List<Card> Cards { get; private set; }
+        public List<Card> Deck { get; private set; }
 
-        public Deck()
+        public Dealer()
         {
-            Cards = new List<Card>();
+            Deck = new List<Card>();
 
             foreach (var suit in Enum.GetValues(typeof(Suit)))
             {
                 foreach (var rank in Enum.GetValues(typeof(Rank)))
                 {
                     if ((Rank)rank != Rank.None)
-                        Cards.Add(new Card { Rank = (Rank) rank, Suit = (Suit) suit });
+                        Deck.Add(new Card { Rank = (Rank) rank, Suit = (Suit) suit });
                 }
             }
         }
 
         public void Deal(Player player)
         {
-            var card = Cards.First();
+            var card = Deck.First();
 
             player.Hand.Add(card);
-            Cards.Remove(card);
+            Deck.Remove(card);
         }
 
         public Hand FillHand()
         {
             var hand = new Hand();
 
-            var cards = Cards.Take(5);
+            var cards = Deck.Take(5);
             foreach (var card in cards)
             {
                 hand.Add(card);
-                Cards.Remove(card);
+                Deck.Remove(card);
             }
 
             return hand;
@@ -50,7 +50,7 @@ namespace PokerHandShowdown.Core
 
         public void Remove(Card card)
         {
-            Cards.Remove(card);
+            Deck.Remove(card);
         }
 
         public void Shuffle()
@@ -58,23 +58,23 @@ namespace PokerHandShowdown.Core
             var shuffledCards = new List<Card>();
             var check = new List<int>();
 
-            for (int i = 0; i < Cards.Count; i++)
+            for (int i = 0; i < Deck.Count; i++)
             {
                 int number;
 
                 do
                 {
-                    number = _random.Next(0, Cards.Count);
+                    number = _random.Next(0, Deck.Count);
                 }
                 while (check.Exists(num => num == number));
 
                 check.Add(number);
 
-                var card = Cards[number];
+                var card = Deck[number];
                 shuffledCards.Add(card);
             }
 
-            Cards = shuffledCards;
+            Deck = shuffledCards;
         }
     }
 }

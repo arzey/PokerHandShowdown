@@ -11,26 +11,26 @@ namespace PokerHandShowdown.Core.Tests
         [Test]
         public void NewDeckShouldHaveFiftyTwoCards()
         {
-            var deck = new Deck();
+            var deck = new Dealer();
 
-            Assert.AreEqual(52, deck.Cards.Count);
+            Assert.AreEqual(52, deck.Deck.Count);
         }
 
         [Test]
         public void ShuffledDeckShouldHaveFiftyTwoCards()
         {
-            var deck = new Deck();
+            var deck = new Dealer();
             deck.Shuffle();
 
-            Assert.AreEqual(52, deck.Cards.Count);
+            Assert.AreEqual(52, deck.Deck.Count);
         }
 
         [Test]
         public void NewDeckShouldNotHaveDuplicateCards()
         {
-            var deck = new Deck();
+            var deck = new Dealer();
 
-            var hasDuplicate = deck.Cards.GroupBy(card => card)
+            var hasDuplicate = deck.Deck.GroupBy(card => card)
                 .Where(card => card.Count() > 1)
                 .Any();
 
@@ -40,11 +40,11 @@ namespace PokerHandShowdown.Core.Tests
         [Test]
         public void ShuffledDeckShouldNotHaveDuplicateCards()
         {
-            var deck = new Deck();
+            var deck = new Dealer();
 
             deck.Shuffle();
 
-            var hasDuplicate = deck.Cards.GroupBy(card => card)
+            var hasDuplicate = deck.Deck.GroupBy(card => card)
                 .Where(card => card.Count() > 1)
                 .Any();
 
@@ -54,7 +54,7 @@ namespace PokerHandShowdown.Core.Tests
         [Test]
         public void FillHandShouldGenerateHandWithCards()
         {
-            var deck = new Deck();
+            var deck = new Dealer();
             deck.Shuffle();
 
             Assert.AreEqual(5, deck.FillHand().Count);
@@ -63,17 +63,17 @@ namespace PokerHandShowdown.Core.Tests
         [Test]
         public void FillHandShouldRemoveCardsFromDeck()
         {
-            var deck = new Deck();
+            var deck = new Dealer();
             deck.Shuffle();
             deck.FillHand();
 
-            Assert.AreEqual(47, deck.Cards.Count);
+            Assert.AreEqual(47, deck.Deck.Count);
         }
 
         [Test]
         public void DealShouldGivePlayerACard()
         {
-            var deck = new Deck();
+            var deck = new Dealer();
             var player = new Player { Name = "Joe" };
 
             deck.Shuffle();
@@ -85,24 +85,24 @@ namespace PokerHandShowdown.Core.Tests
         [Test]
         public void DealShouldRemoveCardFromDeck()
         {
-            var deck = new Deck();
+            var deck = new Dealer();
             var player = new Player { Name = "Joe" };
 
             deck.Shuffle();
             deck.Deal(player);
 
-            Assert.AreEqual(51, deck.Cards.Count);
+            Assert.AreEqual(51, deck.Deck.Count);
         }
 
         [Test]
         public void RemoveShouldRemoveCard()
         {
-            var deck = new Deck();
+            var deck = new Dealer();
             var card = new Card { Rank = Rank.Two, Suit = Suit.Clubs };
 
             deck.Remove(card);
 
-            Assert.IsFalse(deck.Cards.Exists(c => c == card));
+            Assert.IsFalse(deck.Deck.Exists(c => c == card));
         }
     }
 }
